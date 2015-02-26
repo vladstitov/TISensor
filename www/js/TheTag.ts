@@ -75,6 +75,7 @@ module tisensortag{
         }
 
         private device:any;
+
         sensorOn( configUUID,configValue, periodUUID,periodValue,dataUUID,notificationUUID,notificationFunction) {
             if (!notificationFunction)  return;
 
@@ -146,8 +147,58 @@ module tisensortag{
             );
         return this;
     }
+        barometerOn ():TheTag {
+        this.sensorOn(
+            Consts.BAROMETER_CONFIG,
+            1, // Sensor on.
+            null, // Not used.
+            null, // Not used.
+            Consts.BAROMETER_DATA,
+            Consts.BAROMETER_NOTIFICATION,
+            this.barometerFun
+            )
 
+            return this;
+        }
 
+        barometerOff():TheTag{
+        this.sensorOff(Consts.BAROMETER_DATA);
+        return this
+        }
+
+        gyroscopeOn ():TheTag {
+        this.sensorOn(
+            Consts.GYROSCOPE_CONFIG,
+            this.gyroscopeAxes,
+            Consts.GYROSCOPE_PERIOD,
+            this.gyroscopeInterval,
+            Consts.GYROSCOPE_DATA,
+            Consts.GYROSCOPE_NOTIFICATION,
+            this.gyroscopeFun
+            )
+
+            return this;
+        }
+        gyroscopeOff():TheTag {
+        this.sensorOff(Consts.GYROSCOPE_DATA);
+        return this
+        }
+        keypressOn ():TheTag {
+        this.sensorOn(
+            null, // Not used.
+            null, // Not used.
+            null, // Not used.
+            null, // Not used.
+            Consts.KEYPRESS_DATA,
+            Consts.KEYPRESS_NOTIFICATION,
+            this.keypressFun
+        )
+        return this;
+    }
+        keypressOff():TheTag {
+        this.sensorOff(Consts.KEYPRESS_DATA);
+        return this;
+    }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
         private activateSensors():void{

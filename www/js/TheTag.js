@@ -119,6 +119,34 @@ var tisensortag;
             this.sensorOn(tisensortag.Consts.MAGNETOMETER_CONFIG, 1, tisensortag.Consts.MAGNETOMETER_PERIOD, this.magnetometerInterval, tisensortag.Consts.MAGNETOMETER_DATA, tisensortag.Consts.MAGNETOMETER_NOTIFICATION, this.magnetometerFun);
             return this;
         };
+        TheTag.prototype.barometerOn = function () {
+            this.sensorOn(tisensortag.Consts.BAROMETER_CONFIG, 1, null, null, tisensortag.Consts.BAROMETER_DATA, tisensortag.Consts.BAROMETER_NOTIFICATION, this.barometerFun);
+
+            return this;
+        };
+
+        TheTag.prototype.barometerOff = function () {
+            this.sensorOff(tisensortag.Consts.BAROMETER_DATA);
+            return this;
+        };
+
+        TheTag.prototype.gyroscopeOn = function () {
+            this.sensorOn(tisensortag.Consts.GYROSCOPE_CONFIG, this.gyroscopeAxes, tisensortag.Consts.GYROSCOPE_PERIOD, this.gyroscopeInterval, tisensortag.Consts.GYROSCOPE_DATA, tisensortag.Consts.GYROSCOPE_NOTIFICATION, this.gyroscopeFun);
+
+            return this;
+        };
+        TheTag.prototype.gyroscopeOff = function () {
+            this.sensorOff(tisensortag.Consts.GYROSCOPE_DATA);
+            return this;
+        };
+        TheTag.prototype.keypressOn = function () {
+            this.sensorOn(null, null, null, null, tisensortag.Consts.KEYPRESS_DATA, tisensortag.Consts.KEYPRESS_NOTIFICATION, this.keypressFun);
+            return this;
+        };
+        TheTag.prototype.keypressOff = function () {
+            this.sensorOff(tisensortag.Consts.KEYPRESS_DATA);
+            return this;
+        };
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         TheTag.prototype.activateSensors = function () {
